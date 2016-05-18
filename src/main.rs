@@ -2,7 +2,7 @@ fn main() {
     println!("longest sequence: {}", longest_sequence(1000000));
 }
 
-pub fn next_hailstone(n: u64) -> u64 {
+pub fn next_hailstone_number(n: u64) -> u64 {
     if n % 2 == 0 {
         n / 2
     } else {
@@ -10,11 +10,11 @@ pub fn next_hailstone(n: u64) -> u64 {
     }
 }
 
-pub fn heilstone_size(mut n: u64) -> usize {
+pub fn heilstone_sequence_size(mut n: u64) -> usize {
     let mut total_size = 1;
 
     while n > 1 {
-        n = next_hailstone(n);
+        n = next_hailstone_number(n);
         total_size += 1;
     }
 
@@ -26,7 +26,7 @@ pub fn longest_sequence(last: u64) -> u64 {
     let mut max_starter = 0;
 
     for i in 1..last + 1 {
-        let size = heilstone_size(i);
+        let size = heilstone_sequence_size(i);
         if size > max_size {
             max_size = size;
             max_starter = i;
@@ -41,9 +41,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_heilstone_size() {
-        assert_eq!(1, heilstone_size(1)); // 1
-        assert_eq!(2, heilstone_size(2)); // 2 1
-        assert_eq!(8, heilstone_size(3)); // 3 10 5 16 8 4 2 1
+    fn test_heilstone_sequence_size() {
+        assert_eq!(1, heilstone_sequence_size(1)); // 1
+        assert_eq!(2, heilstone_sequence_size(2)); // 2 1
+        assert_eq!(8, heilstone_sequence_size(3)); // 3 10 5 16 8 4 2 1
     }
 }
